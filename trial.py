@@ -33,53 +33,15 @@ def run():
             res = hands.run(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
             hshape = ""
             if hands.his:
-                hshape = gest.Train("/Users/leonachen/downloads/flappy-mediapipe-main/data_folder").getshape(hands.his[-1])
+                hshape = gest.Train("/Users/leonachen/downloads/flappylingo/data_folder").getshape(hands.his[-1])
                 gg.run(hshape, hands.his[-1], hands.his)
                 print(f"state={gg.state}, click={gg.ic}, shape={hshape}")
-                # if gg.state == "cursor":
-                #     point = hands.his[-1][gest.LM.INDEX_FINGER_TIP]
-                #     point = gest.np.mean(hands.his[-1], axis=0)
-                #     SENSE = 1.5
-                #     relativeX = int(point[0] * pag.size()[0] * SENSE)
-                #     relativeY = int(point[1] * pag.size()[1] * SENSE)
-                #     pag.FAILSAFE=False
-                #     pag.moveTo(relativeX, relativeY, _pause=False)
-                # if gg.ic:
-                #     pag.click()
-                #     gg.ic = False
-                # # if gd.state == "ctrlw":
-                # #     gui.hotkey('command','w', _pause=False)
-                # if gg.state == "audio":
-                #     try:
-                #         speech_input.from_mic()
-                #     except AssertionError as e:
-                #         print("ok")
-                #     gg.state = "none"
-
-                # if gg.state == "scroll":
-                #     SCROLLSENSE = 15
-                #     gg.ic=False
-                #     if gg.scrollh > 0.5:
-                #         pag.scroll(
-                #             int(gg.scrollh * SCROLLSENSE), _pause=False)
-                #     else:
-                #         pag.scroll(int(gg.scrollh * -
-                #                     SCROLLSENSE), _pause=False)
-                # if gg.state == "deletetab":
-                #     pag.hotkey('command','w', _pause=True)
-                #     gg.state = None
-                # if gg.state == "newtab":
-                #     pag.hotkey('command','t', _pause=True)
-                #     gg.state = None
-
 
 
             if showvid:
                 # Overlaying the mediapipe "skeleton"
                 # print("hi lmfaooooo")
                 img = hands.drawlol(image, res)
-                # plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
-                # plt.show()
                 cv2.imshow('KEK XD LMFAO', img)
                 # print("hi bro sigh")
 

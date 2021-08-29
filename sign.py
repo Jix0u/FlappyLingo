@@ -16,7 +16,7 @@ import os as o
 class Train:
     #init
     def __init__(self, data_folder):
-        #KNN
+        
         self.clf = neighbors.KNeighborsClassifier(15)
         #training x and y
         t_x = []
@@ -113,7 +113,7 @@ class MH:
                 cv2.rectangle(new_img, (center[0]-200,center[1]-200), (center[0]+200,center[1]+200), (255,255,255), 5)
                 #put text
                 if self.his:
-                    hshape = Train("/Users/leonachen/downloads/flappy-mediapipe-main/data_folder").getshape(self.his[-1])
+                    hshape = Train("/Users/leonachen/downloads/flappylingo/data_folder").getshape(self.his[-1])
                     cv2.putText(new_img,hshape,(center[0]-250,center[1]-209), cv2.FONT_HERSHEY_COMPLEX,3, (225, 150, 255), 9, cv2.LINE_AA)
 
         return new_img
@@ -148,33 +148,18 @@ class States:
         self.his.append(hand)
         self.ic = False
         #check fo specific gestures
-        if check("two", self.his, 8):
-            self.state = "scroll"
+        if check("what is up", self.his, 8):
+            self.state = "what is up"
         elif check("hello", self.his, 8):
             self.state = "hello"
-        elif check("one", self.his, 8):
-            self.state = "newtab"
-        elif check("back-palm", self.his, 8):
-            self.state ="deletetab"
-        if check("audio", self.his, 5):
-            self.state = "audio"
+        elif check("nice to meet you", self.his, 8):
+            self.state = "nice to meet you"
+        elif check("you", self.his, 8):
+            self.state ="you"
+        if check("how are", self.his, 5):
+            self.state = "how are"
         
-        if self.state == "scroll":
-            self.scrollh = 1 - landmarks[LM.MIDDLE_FINGER_MCP][1]
-            if check("open-palm", self.his, 5):
-                self.scrollh = -1
-                self.state = "cursor"
-        elif self.state == "audio" or self.state =="newtab" or self.state =="deletetab":
-            pass
-
-        else:
-            if check("open-palm", self.his, 5):
-                self.state = "cursor"
-            elif check("fist", self.his, 5):
-                self.state = None
-                self.ic = True
-            else:
-                self.state = "none"
+     
 
 
 
