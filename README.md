@@ -3,7 +3,8 @@ Teaching ASL with FlappyBird
 
 Here is the Devpost: (https://devpost.com/software/flappylingo)
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/[fG-f8DWmzY4]/0.jpg)](https://www.youtube.com/watch?v=fG-f8DWmzY4)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/fG-f8DWmzY4/0.jpg)](https://www.youtube.com/watch?v=fG-f8DWmzY4)
+
 
 
 
