@@ -3,7 +3,7 @@ Teaching ASL with FlappyBird
 
 Here is the Devpost: (https://devpost.com/software/flappylingo)
 
-![](https://github.com/Jix0u/FlappyLingo/blob/main/flappylingogif.gif)
+![](https://github.com/Jix0u/FlappyLingo/blob/main/FLAPPYLINGOGIF2.gif)
 
 
 
