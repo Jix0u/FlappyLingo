@@ -1,5 +1,5 @@
 # FlappyLingo
-Teaching ASL with FlappyBird
+Teaching ASL with FlappyBird </br>
 ![](https://github.com/Jix0u/FlappyLingo/blob/main/readme/flappylingomovie.gif)
 
 # How it works
