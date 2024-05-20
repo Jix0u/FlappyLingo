@@ -1,6 +1,6 @@
 # FlappyLingo
 Teaching ASL with FlappyBird
-![](https://github.com/Jix0u/FlappyLingo/blob/main/readme/FLAPPYLINGOGIF2.gif)
+![](https://github.com/Jix0u/FlappyLingo/blob/main/readme/flappylingomovie.gif)
 
 # How it works
 Similar to Duolingo, it teaches users a new language (ASL) but with the addition of flappy bird. Users must demonstrate the correct hand sign to pass each flappy bird pillar, if not the flappy bird will fall, lifelessly to the ground, forcing users to restart. This makes the learning process much more enjoyable and interactive.
