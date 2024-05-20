@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to Flappy Bird</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #87CEEB;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cloud, .curvy-cloud {
+            position: absolute;
+            width: 200px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 100px;
+            opacity: 0.7;
+        }
+
+        .cloud1 {
+            top: 100px;
+            left: 100px;
+            animation: cloudMove1 10s linear infinite;
+        }
+
+        .cloud2 {
+            top: 200px;
+            left: 300px;
+            animation: cloudMove2 10s linear infinite;
+        }
+
+        .cloud3 {
+            top: 50px;
+            left: 500px;
+            animation: cloudMove3 12s linear infinite;
+        }
+
+        .cloud4 {
+            top: 250px;
+            left: 700px;
+            animation: cloudMove4 8s linear infinite;
+        }
+
+        .cloud5 {
+            top: 150px;
+            left: 1000px;
+            animation: cloudMove5 10s linear infinite;
+        }
+
+        .cloud6 {
+            top: 300px;
+            left: 200px;
+            animation: cloudMove6 11s linear infinite;
+        }
+
+        .cloud7 {
+            top: 180px;
+            left: 800px;
+            animation: cloudMove7 9s linear infinite;
+        }
+
+        .cloud8 {
+            top: 350px;
+            left: 600px;
+            animation: cloudMove8 13s linear infinite;
+        }
+
+        #welcome-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 3px solid #00b1d8;
+            animation: fadeIn 2s;
+        }
+
+        h1 {
+            color: #00bfee;
+        }
+
+        p {
+            color: #333;
+        }
+
+        .bird {
+            width: 50px;
+            height: 35px;
+            left: 40px;
+            background-image: url('assets/sprites/yellowbird-midflap.png');
+            background-size: cover;
+            position: absolute;
+            transition: transform 0.2s;
+            animation: birdSquiggle 3s linear infinite;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #02b025;
+            color: #FFF;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        a:hover {
+            background-color: #6aeb00;
+            transform: scale(1.1);
+        }
+
+        @keyframes cloudMove1 {
+            0%, 100% {
+                left: 100px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove2 {
+            0%, 100% {
+                left: 300px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove3 {
+            0%, 100% {
+                left: 500px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove4 {
+            0%, 100% {
+                left: 700px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove5 {
+            0%, 100% {
+                left: 1000px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove6 {
+            0%, 100% {
+                left: 200px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+        @keyframes birdSquiggle {
+            0% {
+                transform: translate(-50%, -50%) translateY(0) rotate(0);
+            }
+            25% {
+                transform: translate(-50%, -50%) translateY(-30px) rotate(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) translateY(0) rotate(0);
+            }
+            75% {
+                transform: translate(-50%, -50%) translateY(30px) rotate(0);
+            }
+            100% {
+                transform: translate(-50%, -50%) translateY(0) rotate(0);
+            }
+        }
+
+        @keyframes cloudMove7 {
+            0%, 100% {
+                left: 800px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes cloudMove8 {
+            0%, 100% {
+                left: 600px;
+            }
+            50% {
+                left: -200px;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Add cloud elements to the background -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+    <div class="cloud cloud4"></div>
+    <div class="cloud cloud5"></div>
+    <div class="cloud cloud6"></div>
+    <div class="cloud cloud7"></div>
+    <div class="cloud cloud8"></div>
+
+    <!-- Add more curvy cloud elements as needed -->
+
+    <div id="welcome-container">
+        <h1>Welcome to FlappyLingo</h1>
+        <p>Teaching ASL with FlappyBird!</p>
+        <div class="bird" id="flappy-bird"></div>
+        <a href="#" id="start-game-link">Start Game</a>
+    </div>
+
+    <script>
+        // Get a reference to the "Start Game" link
+var startGameLink = document.getElementById("start-game-link");
+
+// Add a click event listener to the link
+startGameLink.addEventListener("click", function (event) {
+    // Prevent the default link behavior (preventing it from navigating)
+    event.preventDefault();
+
+    // Close the window
+    window.close();
+});
+
+
+       const bird = document.getElementById('flappy-bird');
+const spriteImages = [
+    'assets/sprites/yellowbird-upflap.png',
+    'assets/sprites/yellowbird-midflap.png',
+    'assets/sprites/yellowbird-downflap.png'
+];
+let currentSpriteIndex = 0;
+
+function changeSprite() {
+    bird.style.backgroundImage = `url('${spriteImages[currentSpriteIndex]}')`;
+    currentSpriteIndex = (currentSpriteIndex + 1) % spriteImages.length;
+}
+
+// Call the changeSprite function at regular intervals (e.g., every 200 milliseconds)
+const spriteInterval = setInterval(changeSprite, 100);
+    </script>
+</body>
+</html>
