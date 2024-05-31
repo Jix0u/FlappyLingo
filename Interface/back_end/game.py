@@ -1,6 +1,7 @@
 #Assets from : https://github.com/samuelcust/flappy-bird-assets
 #Ref Flappy bird code from : https://www.geeksforgeeks.org/how-to-make-flappy-bird-game-in-pygame/
 #imports
+from typing import Any
 import cv2
 import sys
 import random
@@ -44,8 +45,12 @@ plt.switch_backend('Agg')
 bird_sprites = [MIDFLAP, FLAPDOWN, FLAPUP]
 
 
-#WELCOME GAME_SCREEN
-def welcomeGAME_SCREEN():
+def welcomeGAME_SCREEN() -> None:
+    """
+    Display the welcome screen for the game.
+
+    :return: None
+    """
     bird_index = 0
 
     birdx = int((W -SPRITES['bird'].get_width())/2)
@@ -73,8 +78,13 @@ def welcomeGAME_SCREEN():
                 pygame.display.update()
                 clockie.tick(FPS)
 
-#MAIN GAME_SCREEN
-def mainGAME_SCREEN():
+
+def mainGAME_SCREEN() -> None:
+    """
+    Main game loop for FlappyLingo.
+
+    :return: None
+    """
     bird_index = 0
     font = pygame.font.Font("assets/fonts/ka1.TTF", 30)  # You can change the font and size here
     string_list = ["A", "hello", "B", "C", "where", "I love you", "me"]
@@ -285,8 +295,17 @@ def mainGAME_SCREEN():
         GAME_SCREEN.blit(resized_game_img, (50, 50))
         pygame.display.update()
 
-#out of bounds (collision with pipe/floor)
-def OutOfBounds(birdx, birdy, topPipes, botPipes):
+
+def OutOfBounds(birdx, birdy, topPipes, botPipes) -> bool:
+    """
+    Check if the bird has collided with the pipes or gone out of bounds.
+
+    :param birdx: The x-coordinate of the bird.
+    :param birdy: The y-coordinate of the bird.
+    :param topPipes: List of top pipe dictionaries with 'x' and 'y' coordinates.
+    :param botPipes: List of bottom pipe dictionaries with 'x' and 'y' coordinates.
+    :return: True if the bird is out of bounds or has collided with a pipe, False otherwise.
+    """
     if birdy> FLOOR - 25  or birdy<0:
         AUDIO['die'].play()
         return True
@@ -303,7 +322,12 @@ def OutOfBounds(birdx, birdy, topPipes, botPipes):
     return False
 
 #pipes
-def PipeGenerator():
+def PipeGenerator() -> list[dict[str, Any]]:
+    """
+    Generate a new pair of top and bottom pipes with random heights.
+
+    :return: A list of dictionaries containing the 'x' and 'y' coordinates for the top and bottom pipes.
+    """
     pipeHeight = SPRITES['pipe'][0].get_height()
     leftie = H/3
     yTWO = leftie + random.randrange(0, int(H - SPRITES['base'].get_height()  - 1.2 *leftie))
