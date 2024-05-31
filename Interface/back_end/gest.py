@@ -1,6 +1,5 @@
 # Ref: https://github.com/google/mediapipe/blob/master/mediapipe/python/solutions/hands.py
-
-#imports
+"Model definition and Traning main runner"
 import cv2
 import collections
 import numpy as np
@@ -11,22 +10,24 @@ from matplotlib import pyplot as plt
 import pickle
 import os as o
 from hands import MH
+from sklearn.ensemble import RandomForestClassifier
+
 
 class Train:
     """
-    A class used to train a k-nearest neighbors (KNN) model on hand gesture data.
+    A class used to train a RandomForestClassifier model on hand gesture data.
 
     :param data_folder: The folder containing the training data.
     :type data_folder: str
 
-    :ivar clf: The KNN classifier used for training and prediction.
+    :ivar clf: The RandomForestClassifier used for training and prediction.
     :ivar lb: A list of labels corresponding to the training data.
 
     :method getshape: Predicts the shape/gesture of the given hand landmarks.
     """
     def __init__(self, data_folder):
         """
-        Initializes the Train class with a KNN classifier and trains it with data from the given folder.
+        Initializes the Train class with a RandomForestClassifier classifier and trains it with data from the given folder.
 
         :param data_folder: The folder containing the training data.
         :type data_folder: str
