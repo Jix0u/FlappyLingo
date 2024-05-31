@@ -8,8 +8,8 @@ FlappyLingo utilizes the Mediapipe API to draw hand skeletons and recognize gest
 2. **Flappy Bird Integration:**
 Pygame is employed to create the game interface and implement the mechanics of Flappy Bird. Users control the Flappy Bird character by demonstrating the correct ASL hand signs, guiding it through pillars representing language learning challenges.
 
-3. **Machine Learning with Convolutional Networks(C-NN):**
-Keras's CNN model is imported to train the sign language recognition system. By learning from custom-made data, the model becomes adept at identifying and categorizing hand gestures accurately.
+3. **Machine Learning with K-Nearest-Neighbours (K-NN):**
+Scikit-learn's KNN model is imported to train the sign language recognition system. By learning from custom-made data, the model becomes adept at identifying and categorizing hand gestures accurately.
 
 4. **Data Compilation with Pickle**:
 Pickle is utilized to compile custom-made data required for training the K-NN model. This facilitates the storage and retrieval of essential information necessary for accurate gesture recognition.
