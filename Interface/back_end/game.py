@@ -18,6 +18,24 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logging.getLogger('matplotlib').setLevel(logging.WARNING)
 
 class Game:
+    """
+    A class to encapsulate the Flappy Bird game.
+
+    :ivar GAME_SCREEN: The main display surface for the game, set to fullscreen mode.
+    :ivar W: The width of the display screen.
+    :ivar H: The height of the display screen.
+    :ivar FLOOR: The height of the floor in the game, calculated as 80% of the screen height.
+    :ivar SPRITES: A dictionary holding the game's sprite images.
+    :ivar AUDIO: A dictionary holding the game's audio files.
+    :ivar FPS: The frames per second setting for the game.
+
+    :method __init__: Initializes the game screen and loads the sprites and audio.
+    :method display_welcome_game_screen: Displays the welcome screen for the game.
+    :method display_main_game_screen: Displays the main screen for the game.
+    :method check_out_of_bounds: Checks if player is out of bounds.
+    :method generate_pipe: Displays and generates the next pipe.
+
+    """
     def __init__(self) -> None:
         """
         Initialize game screen.
@@ -69,7 +87,7 @@ class Game:
 
         self.AUDIO = {key: pygame.mixer.Sound(path) for key, path in audio_paths.items()}
     
-    def welcomeGAME_SCREEN(self, bird_sprites) -> None:
+    def display_welcome_game_screen(self, bird_sprites) -> None:
         """
         Display the welcome screen for the game.
 
@@ -109,7 +127,7 @@ class Game:
                     clockie.tick(self.FPS)
 
 
-    def mainGAME_SCREEN(self,bird_sprites) -> None:
+    def display_main_game_screen(self,bird_sprites) -> None:
         """
         Main game loop for FlappyLingo.
 
@@ -120,7 +138,7 @@ class Game:
         cap = cv2.VideoCapture(4)
         hand = gest.MH(buffer_size=100)
         showvid = True
-        
+
         bird_index = 0
         font = pygame.font.Font("assets/fonts/ka1.TTF", 30) 
         string_list = ["A", "hello", "B", "C", "where", "I love you", "me"]
@@ -134,8 +152,8 @@ class Game:
         birdy = int(self.H/2)-200
         basex = 0
 
-        pipeNumero1 = self.PipeGenerator()
-        pipeNumero2 = self.PipeGenerator()
+        pipeNumero1 = self.generate_pipe()
+        pipeNumero2 = self.generate_pipe()
 
         topPipes = [
             {'x': self.W+200, 'y':pipeNumero1[0]['y']},
@@ -214,7 +232,7 @@ class Game:
                 elif event.type == pygame.KEYDOWN and event.key== pygame.K_ESCAPE:
                     pygame.display.toggle_fullscreen()
 
-            boomHit = self.OutOfBounds(birdx, birdy, topPipes, botPipes) 
+            boomHit = self.check_out_of_bounds(birdx, birdy, topPipes, botPipes) 
             if boomHit: 
                 return     
 
@@ -242,7 +260,7 @@ class Game:
                     lowerPipe['x'] += pipeVelX
 
                 if 0<topPipes[0]['x']< 1000 and len(topPipes) < 2:
-                    newpipe = self.PipeGenerator()
+                    newpipe = self.generate_pipe()
                     topPipes.append(newpipe[0])
                     botPipes.append(newpipe[1])
 
@@ -316,7 +334,7 @@ class Game:
             pygame.display.update()
 
 
-    def OutOfBounds(self,birdx, birdy, topPipes, botPipes):
+    def check_out_of_bounds(self,birdx, birdy, topPipes, botPipes):
         """
         Check if the bird has collided with the pipes or gone out of bounds.
 
@@ -342,7 +360,7 @@ class Game:
         return False
 
 
-    def PipeGenerator(self):
+    def generate_pipe(self):
         """
         Generate a new pair of top and bottom pipes with random heights.
 
@@ -382,10 +400,10 @@ if __name__ == "__main__":
 
         while True:
             logging.debug('Displaying welcome game screen')
-            game.welcomeGAME_SCREEN(bird_sprites)
+            game.display_welcome_game_screen(bird_sprites)
             
             logging.debug('Displaying main game screen')
-            game.mainGAME_SCREEN(bird_sprites)
+            game.display_main_game_screen(bird_sprites)
     except Exception as e:
         logging.error('An error occurred: %s', e)
     finally:
