@@ -11,40 +11,57 @@ import os as o
 
 
 class MH:
-    #init
+    """
+    A class used for hand tracking and gesture recognition using MediaPipe.
+
+    :param buffer_size: The size of the buffer to store hand landmarks history.
+    :type buffer_size: int, optional
+
+    :ivar hands: An instance of MediaPipe Hands for hand landmark detection.
+    :ivar his: A deque to store the history of hand landmarks.
+    :ivar tmt: Track missing threshold.
+    :ivar tmn: Track missing number.
+
+    :method run: Processes an image to detect hand landmarks.
+    :method drawlol: Draws landmarks and bounding box on the image.
+    :method close: Closes the MediaPipe Hands instance.
+    """
     def __init__(self, buffer_size=None):
-        #get hands
+        """
+        Initializes the MH class with MediaPipe Hands and a deque for hand landmarks history.
+
+        :param buffer_size: The size of the buffer to store hand landmarks history.
+        :type buffer_size: int, optional
+        """
         self.hands = mp.solutions.hands.Hands(
              min_tracking_confidence=0.9,
              min_detection_confidence=0.75
         )
-        #get
         self.his = collections.deque(maxlen=None)
 
-        #thresh & num
         self.tmt= 3
         self.tmn= 0
 
-    #run img
     def run(self, img):
-        #get img.shape
+        """
+        Processes an image to detect hand landmarks.
+
+        :param img: The input image in which to detect hand landmarks.
+        :type img: numpy.ndarray
+        :return: The result of the hand landmarks detection.
+        :rtype: mediapipe.python.solutions.hands.Hands
+        """
         img_width, img_height, _ = img.shape
-        #input photo
         inpi = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB)
         inpi.flags.writeable = False
-        #set result
         res = self.hands.process(cv2.cvtColor(inpi, cv2.COLOR_BGR2RGB))
 
-        #check result arr
         if res.multi_hand_landmarks:
-            #set track missing num to 0
             self.tmn = 0
             res_arr = np.asarray([[pt.x, pt.y] for pt in res.multi_hand_landmarks[0].landmark])
             self.his.append(res_arr)
-        #if track missing num smaller that track missing thresh
         elif self.tmn < self.tmt:
             self.tmn += 1
-        #otherwise clear history
         else:
             self.his.clear()
             self.tmn = 0
@@ -52,8 +69,19 @@ class MH:
 
         return res
 
-    #draw
     def drawlol(self, image, res, model):
+        """
+        Draws landmarks and bounding box on the image.
+
+        :param image: The input image on which to draw.
+        :type image: numpy.ndarray
+        :param res: The result from the hand landmarks detection.
+        :type res: mediapipe.python.solutions.hands.Hands
+        :param model: The model used for gesture recognition.
+        :type model: object
+        :return: The image with drawn landmarks and bounding box.
+        :rtype: numpy.ndarray
+        """
         image_width, image_height, _ = image.shape
         #flip img
         new_img = cv2.flip(image, 1) 
@@ -84,4 +112,9 @@ class MH:
     
 
     def close(self):
+        """
+        Closes the MediaPipe Hands instance.
+        
+        :return: None
+        """
         self.hands.close()
